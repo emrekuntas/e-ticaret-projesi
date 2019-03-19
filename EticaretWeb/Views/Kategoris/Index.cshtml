@@ -1,0 +1,33 @@
+﻿@model IEnumerable<EticaretWeb.Models.Kategori>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Yeni Categori", "Create",null, new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th width="80%">
+            @Html.DisplayNameFor(model => model.KategoriAdi)
+        </th>
+        <th width="20%"></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.KategoriAdi)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.KategoriId },new {@class="btn btn-success" }) |
+            @Html.ActionLink("Details", "Details", new { id=item.KategoriId }, new { @class = "btn btn-primary" }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.KategoriId }, new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,43 @@
+﻿@using EticaretWeb.Models;
+
+@{
+    ViewBag.Title = "Eticaret Sitesi";
+    IEnumerable<Kategori> KategoriListesi = ViewBag.KategoriListesi as IEnumerable<Kategori>;
+    IEnumerable<Urunler> SonUrunler = ViewBag.SonUrunler as IEnumerable<Urunler>;
+}
+
+<div class="jumbotron">
+    <h1>Eticaret Sitesi</h1>
+       
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <h2>Kategoriler</h2>
+        <ul>
+           @foreach (var item in KategoriListesi)
+           {
+               <li>@Html.ActionLink(item.KategoriAdi,"Kategori",new { id=item.KategoriId})</li>
+           }
+        </ul>
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+            @foreach (var item in SonUrunler)
+            {
+            <div class="col-md-4" style="border:1px solid #808080">
+                <h5>@item.UrunAdi</h5>
+                <img src="~/Resim/@(item.UrunId).jpg" style="max-width:100%;" alt="Alternate Text" />
+                <p><a class="btn btn-default" href="@Url.Action("Urun","Home",new { id=item.UrunId})">Urun Detay</a>
+                   <span style="color:red;float:right;font-size:16px;font-weight:bold"></span>
+                </p>
+            </div>
+            }
+        </div>
+    </div>
+    <div class="col-md-4">
+        <h2>Web Hosting</h2>
+        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    </div>
+</div>

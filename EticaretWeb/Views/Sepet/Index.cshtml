@@ -1,0 +1,66 @@
+﻿@model IEnumerable<EticaretWeb.Models.Sepet>
+
+@{
+    ViewBag.Title = "Index";
+
+}
+<div class="jumbotron">
+    <h2>Sepet Bölümü</h2>
+
+</div>
+<table class="table">
+    <tr>
+
+        <th> @Html.DisplayNameFor(model => model.Urunler.UrunAdi)</th>
+        <th> @Html.DisplayNameFor(model => model.Adet)</th>
+        <th> @Html.DisplayNameFor(model => model.Tutar) </th>
+        <th>Aksiyonlar</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(m => item.Urunler.UrunAdi)
+        </td>
+
+        <td>
+            @Html.DisplayFor(m => item.Adet)
+
+        </td>
+        <td>
+            @Html.DisplayFor(m => item.Tutar) TL
+
+        </td>
+        <td style="width:250px;">
+            <form action="/Sepet/SepetGuncelle" method="post">
+                <input type="hidden" name="id" value="@item.SepetId" style="width:50px" />
+                <input type="number" name="adet" id="adet" value="@item.Adet" style="width:50px" />
+                <input type="submit" id="gonder" value="Guncelle" class="btn btn-success" />
+                @Html.ActionLink("Sil", "Sil", new { id = item.SepetId }, new { @class = "btn btn-danger" })
+            </form>
+        </td>
+  </tr>
+
+    }
+    <tr>
+        <td style="font-style:italic">
+            Toplam
+        </td>
+        <td>
+            @Model.Sum(a => a.Adet)
+        </td>
+        <td>
+            @Model.Sum(a => a.Tutar) TL
+        </td>
+       <td></td>
+       
+    </tr>
+    <tr>
+        <td>
+            <a class="btn btn-danger" href="@Url.Action("Index","Home")">Alışverişe Devam Et</a>
+        </td>
+        <td colspan="3" style="text-align:right">
+            <a class="btn btn-primary" href="@Url.Action("SiparisTamamla","Siparis")">Alışverişi Tamamla</a>
+        </td>
+    </tr>
+</table>
